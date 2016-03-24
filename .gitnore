@@ -1,4 +1,4 @@
-/node_modules
-/data
-/mongod
-/.git
+node_modules/
+data/
+mongod
+.git
