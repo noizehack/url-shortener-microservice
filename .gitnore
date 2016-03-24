@@ -1,4 +1,4 @@
-.env
-/node_modules/
-/data/
-mongod
+/node_modules
+/data
+/mongod
+/.git
