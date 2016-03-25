@@ -91,8 +91,14 @@ mongoClient.connect(mongoURI, function (err, db) {
     } else { //using a shortener code and expecting a redirect
       urlCodes.findOne({shortCode: parsedUrl.pathname.slice(1)}, function (err, doc) {
         if (err) throw err;
-        res.writeHead(301, { 'Content-Type': 'text/plain', 'location': doc.original_url });
-        res.end('redirecting');
+        if (doc !== null) {//redirect if code is in db
+          res.writeHead(301, { 'Content-Type': 'text/plain', 'location': doc.original_url });
+          res.end('redirecting');
+        } else {
+          json = {'error':'short code not in database'};
+          res.writeHead(200, { 'Content-Type': 'application/json' });
+          res.end(JSON.stringify(json));
+        }
       });
     }
   });
